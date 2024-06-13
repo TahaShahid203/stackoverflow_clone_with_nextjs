@@ -17,7 +17,11 @@ const GlobalSearch = () => {
           className="cursor-pointer"
         />
 
-        <Input />
+        <Input 
+        type="text"
+        placeholder="Search globally"
+        className="paragraph-regular no-focus placeholder background-light800_darkgradient border-none shadow-none outline-none"
+        />
       </div>
     </div>
   );

@@ -10,7 +10,7 @@ const middleware = clerkMiddleware({
 function applyClerkMiddleware(req: NextRequest, res: NextFetchEvent, next: () => any) {
   // List of API endpoints that should not be protected
   const unprotectedRoutes = [
-    "/api/webhooks",
+    "https://stackoverflow-clone-with-nex-git-d8fd37-tahashahid203s-projects.vercel.app/api/webhooks",
     // Add more endpoints here as needed
   ];
 

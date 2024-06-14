@@ -1,4 +1,5 @@
 import { clerkMiddleware } from "@clerk/nextjs/server";
+import { NextRequest, NextFetchEvent } from "next/server";
 
 // Define the middleware function
 const middleware = clerkMiddleware({
@@ -6,7 +7,7 @@ const middleware = clerkMiddleware({
 });
 
 // Define a function to conditionally apply the middleware
-function applyClerkMiddleware(req, res, next) {
+function applyClerkMiddleware(req: NextRequest, res: NextFetchEvent, next: () => any) {
   // List of API endpoints that should not be protected
   const unprotectedRoutes = [
     "/api/webhooks",
@@ -20,7 +21,7 @@ function applyClerkMiddleware(req, res, next) {
   }
 
   // Apply Clerk middleware for all other routes
-  return middleware(req, res, next);
+  return middleware(req, res);
 }
 
 // Export the conditional middleware

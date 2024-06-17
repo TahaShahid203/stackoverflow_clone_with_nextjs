@@ -13,7 +13,7 @@ export default authMiddleware({
     '/jobs'
   ],
   ignoredRoutes: [
-    '/api/webhook', '/api/chatgpt'
+    '/api/webhooks', '/api/chatgpt'
   ]
 });
  

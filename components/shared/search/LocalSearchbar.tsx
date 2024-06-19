@@ -56,7 +56,6 @@ const LocalSearchbar = ({
   }, [search, route, pathname, router, searchParams, query])
   
 
-  console.log(query);
 
   return (
     <div

@@ -10,7 +10,7 @@ import { revalidatePath } from "next/cache";
 
 export async function getQuestions(params: GetQuestionsParams){
    try{
-      connectToDatabase();
+      await connectToDatabase();
 
       const questions = await Question.find({}).populate({ path: 'tags', model: Tag}).populate({ path: 'author', model: User}).sort({createdAt: -1})
 
@@ -25,7 +25,7 @@ export async function getQuestions(params: GetQuestionsParams){
 export async function createQuestion(params:CreateQuestionParams) {
     // eslint-disable-next-line no-empty
     try {
-        connectToDatabase();
+        await connectToDatabase();
 
          const {title, content, tags, author, path} = params;
 
@@ -56,7 +56,7 @@ export async function createQuestion(params:CreateQuestionParams) {
 
 export async function getQuestionById(params:GetQuestionByIdParams) {
    try {
-      connectToDatabase();
+      await connectToDatabase();
 
       const {questionId} = params;
       const question = await Question.findById(questionId).populate({path: 'tags', model: Tag, select: '_id name'}).populate({path: 'author', model: User, select: '_id clerkId name picture'});
@@ -72,7 +72,7 @@ export async function getQuestionById(params:GetQuestionByIdParams) {
 
 export async function upvoteQuestion(params: QuestionVoteParams){
    try {
-      connectToDatabase();
+      await connectToDatabase();
       const {questionId, userId, hasupVoted, hasdownVoted, path} = params;
 
       let updateQuery = {};
@@ -105,7 +105,7 @@ export async function upvoteQuestion(params: QuestionVoteParams){
 }
 export async function downvoteQuestion(params: QuestionVoteParams){
    try {
-      connectToDatabase();
+      await connectToDatabase();
       const {questionId, userId, hasupVoted, hasdownVoted, path} = params;
 
       let updateQuery = {};

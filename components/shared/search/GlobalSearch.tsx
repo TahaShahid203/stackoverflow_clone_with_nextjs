@@ -11,7 +11,7 @@ const GlobalSearch = () => {
   const router = useRouter();
   const pathname = usePathname();
   const searchParams = useSearchParams();
-  const searchContainerRef = useRef();
+  const searchContainerRef = useRef(null);
 
   const query = searchParams.get("q");
 

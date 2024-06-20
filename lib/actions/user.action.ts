@@ -8,7 +8,6 @@ import { revalidatePath } from "next/cache";
 import Question from "@/database/question.model";
 import Tag from "@/database/tag.model";
 import Answer from "@/database/answer.model";
-import { skip } from "node:test";
 
 export async function getUserById(params: any){
     try {
@@ -243,7 +242,7 @@ export async function getUserQuestions(params: GetUserStatsParams){
 
         const totalQuestions = await Question.countDocuments({author: userId});
 
-        const userQuestions = await Question.find({ author: userId}).skip(skipAmount).limit(pageSize).sort({views: -1, upvotes: -1}).populate('tags', '_id name').populate('author', '_id clerkId name picture');
+        const userQuestions = await Question.find({ author: userId}).skip(skipAmount).limit(pageSize).sort({createdAt: -1, views: -1, upvotes: -1}).populate('tags', '_id name').populate('author', '_id clerkId name picture');
 
         const isNext = totalQuestions > skipAmount + userQuestions.length
         return {totalQuestions, questions: userQuestions, isNext};

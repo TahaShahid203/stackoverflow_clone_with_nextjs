@@ -10,6 +10,14 @@ import QuestionCard from "@/components/cards/QuestionCard";
 import { getQuestions } from "@/lib/actions/question.action";
 import { SearchParamsProps } from "@/types";
 import Pagination from "@/components/shared/Pagination";
+import type { Metadata } from "next";
+
+
+export const metadata: Metadata = {
+  title: 'Home | Dev Overflow',
+  description: 'Dev Overflow is a community of 1,000,000+ developers. Join us.',
+  
+}
 
 const Home = async ({ searchParams }: SearchParamsProps) => {
   const result = await getQuestions({

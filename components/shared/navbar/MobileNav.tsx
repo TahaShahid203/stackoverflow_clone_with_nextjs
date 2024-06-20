@@ -69,7 +69,7 @@ const MobileNav = () => {
           </p>
         </Link>
 
-        <div className="overflow-y-auto">
+        <div className="flex flex-col flex-wrap overflow-y-auto">
           <SheetClose asChild>
             <NavContent />
           </SheetClose>

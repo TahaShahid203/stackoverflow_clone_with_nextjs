@@ -69,7 +69,7 @@ const MobileNav = () => {
           </p>
         </Link>
 
-        <div>
+        <div className="h-full overflow-y-auto">
           <SheetClose asChild>
             <NavContent />
           </SheetClose>

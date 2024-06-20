@@ -7,24 +7,22 @@ import QuestionCard from "@/components/cards/QuestionCard";
 import { getSavedQuestions } from "@/lib/actions/user.action";
 import { auth } from "@clerk/nextjs/server";
 import { SearchParamsProps } from "@/types";
+import Pagination from "@/components/shared/Pagination";
 
-
-const Home = async ({searchParams}: SearchParamsProps) => {
-    const {userId} = auth();
-    if (!userId){
-        return null;
-    }
+const Home = async ({ searchParams }: SearchParamsProps) => {
+  const { userId } = auth();
+  if (!userId) return null;
   const result = await getSavedQuestions({
     clerkId: userId,
     searchQuery: searchParams.q,
-    filter: searchParams.filter
-});
+    filter: searchParams.filter,
+    page: searchParams?.page ? +searchParams.page : 1,
+  });
 
   return (
     <>
-        <h1 className="h1-bold text-dark100_light900">Saved Questions</h1>
+      <h1 className="h1-bold text-dark100_light900">Saved Questions</h1>
 
-      
       <div className="mt-11 flex justify-between gap-5 max-sm:flex-col sm:items-center">
         <LocalSearchbar
           route="/"
@@ -39,7 +37,6 @@ const Home = async ({searchParams}: SearchParamsProps) => {
           otherClasses="min-h-[56px] sm:min-w-[170px]"
         />
       </div>
-
 
       <div className="mt-10 flex w-full flex-col gap-6">
         {result.questions.length > 0 ? (
@@ -66,6 +63,12 @@ const Home = async ({searchParams}: SearchParamsProps) => {
             linkTitle="Ask a Question"
           />
         )}
+      </div>
+      <div className="mt-10">
+        <Pagination
+          pageNumber={searchParams?.page ? +searchParams.page : 1}
+          isNext={result.isNext}
+        />
       </div>
     </>
   );

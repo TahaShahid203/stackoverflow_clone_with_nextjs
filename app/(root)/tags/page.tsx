@@ -1,5 +1,6 @@
 import Filter from "@/components/shared/Filter";
 import NoResult from "@/components/shared/NoResult";
+import Pagination from "@/components/shared/Pagination";
 import LocalSearchbar from "@/components/shared/search/LocalSearchbar";
 import { TagFilters } from "@/constants/filters";
 import { getAllTags } from "@/lib/actions/tag.actions";
@@ -10,7 +11,8 @@ import React from "react";
 const page = async({searchParams}: SearchParamsProps) => {
     const result = await getAllTags({
       searchQuery: searchParams.q,
-      filter: searchParams.filter
+      filter: searchParams.filter,
+      page: searchParams?.page ? +searchParams.page : 1,
     });
 
   return (
@@ -55,6 +57,13 @@ const page = async({searchParams}: SearchParamsProps) => {
                 linkTitle="Ask a question"/>
             )}
       </section>
+
+      <div className="mt10">
+      <Pagination
+          pageNumber={searchParams?.page ? +searchParams.page : 1}
+          isNext={result.isNext}
+        />
+      </div>
     </>
   );
 };
